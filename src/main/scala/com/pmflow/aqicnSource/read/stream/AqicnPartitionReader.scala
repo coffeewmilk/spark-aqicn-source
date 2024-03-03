@@ -8,14 +8,27 @@ import requests.{get => rget, Response}
 import ujson.read
 import upickle.default
 import org.apache.spark.unsafe.types.{UTF8String}
+import scala.collection.mutable.ArrayBuffer
 
 class AqicnPartitionReader (val inputPartition: AqicnInputPartition, val schema: StructType, val key: String, val latlon1: String, val latlon2: String) extends PartitionReader[InternalRow]
 {
-    val r: Response = rget("https://api.waqi.info/v2/map/bounds", 
+    
+  val array = fetchData()
+
+  def fetchData(): ArrayBuffer[ujson.Value] = {
+    try {
+      val r: Response = rget("https://api.waqi.info/v2/map/bounds", 
                               params = Map("latlng" -> s"$latlon1,$latlon2",
                                            "token" -> key))
-    val data = read(r.text)
-    val array = data("data").arr
+      val data = read(r.text)
+      data("data").arr
+    } catch {
+      case e: Exception => {
+        println(s"Data fetching failed due to: ${e.getMessage()}, Skip this batch!")
+        ArrayBuffer.empty[ujson.Value]
+      }
+    }
+  }
 
   override def next: Boolean = {
     !array.isEmpty
