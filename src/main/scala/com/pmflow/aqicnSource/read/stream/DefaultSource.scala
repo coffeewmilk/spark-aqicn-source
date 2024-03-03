@@ -1,4 +1,4 @@
-package spark.customSource.read.stream
+package com.pmflow.aqicnSource.read.stream
 
 import DefaultSource.getSchema
 import org.apache.spark.sql.connector.catalog.Table
@@ -14,7 +14,7 @@ class DefaultSource() extends TableProvider {
   override def inferSchema(options: CaseInsensitiveStringMap): StructType = getSchema
 
   override def getTable(schema: StructType, partitioning: Array[Transform], properties: util.Map[String, String]): Table = {
-    new CustomTable(schema, properties)
+    new AqicnTable(schema, properties)
   }
 
   override def supportsExternalMetadata = true

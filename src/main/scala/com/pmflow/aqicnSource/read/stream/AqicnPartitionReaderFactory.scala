@@ -1,12 +1,12 @@
-package spark.customSource.read.stream
+package com.pmflow.aqicnSource.read.stream
 
 import org.apache.spark.sql.connector.read.{InputPartition, PartitionReaderFactory}
 import org.apache.spark.sql.types.StructType
 import org.apache.spark.sql.util.CaseInsensitiveStringMap
 
-class CustomPartitionReaderFactory (val schema: StructType, val key: String, val latlon1: String, val latlon2: String) extends PartitionReaderFactory {
+class AqicnPartitionReaderFactory (val schema: StructType, val key: String, val latlon1: String, val latlon2: String) extends PartitionReaderFactory {
 
-    override def createReader(partition: InputPartition) = new CustomPartitionReader(partition.asInstanceOf[CustomInputPartition], 
+    override def createReader(partition: InputPartition) = new AqicnPartitionReader(partition.asInstanceOf[AqicnInputPartition], 
                                                                                      schema, 
                                                                                      key,
                                                                                      latlon1,

@@ -1,4 +1,4 @@
-package spark.customSource.read.stream
+package com.pmflow.aqicnSource.read.stream
 
 import org.apache.spark.sql.catalyst.InternalRow
 import org.apache.spark.sql.connector.read.PartitionReader
@@ -9,7 +9,7 @@ import ujson.read
 import upickle.default
 import org.apache.spark.unsafe.types.{UTF8String}
 
-class CustomPartitionReader (val inputPartition: CustomInputPartition, val schema: StructType, val key: String, val latlon1: String, val latlon2: String) extends PartitionReader[InternalRow]
+class AqicnPartitionReader (val inputPartition: AqicnInputPartition, val schema: StructType, val key: String, val latlon1: String, val latlon2: String) extends PartitionReader[InternalRow]
 {
     val r: Response = rget("https://api.waqi.info/v2/map/bounds", 
                               params = Map("latlng" -> s"$latlon1,$latlon2",

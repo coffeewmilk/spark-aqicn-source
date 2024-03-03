@@ -1,4 +1,4 @@
-package spark.customSource.read.stream
+package com.pmflow.aqicnSource.read.stream
 
 import org.apache.spark.sql.connector.catalog.{SupportsRead, TableCapability}
 import org.apache.spark.sql.connector.read.ScanBuilder
@@ -8,11 +8,11 @@ import org.apache.spark.sql.util.CaseInsensitiveStringMap
 import java.util
 
 
-class CustomTable(val schema: StructType, override val properties: util.Map[String, String]) extends SupportsRead {
+class AqicnTable(val schema: StructType, override val properties: util.Map[String, String]) extends SupportsRead {
   private val capabilitiesSet = new util.HashSet[TableCapability]
 
   override def newScanBuilder(options: CaseInsensitiveStringMap): ScanBuilder = {
-    new CustomScanBuilder(schema, properties, options)
+    new AqicnScanBuilder(schema, properties, options)
   }
 
   override def name = "custom_table"

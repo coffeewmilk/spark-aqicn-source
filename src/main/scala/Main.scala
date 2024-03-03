@@ -1,4 +1,4 @@
-package spark
+
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
 import org.apache.spark.sql.SparkSession;
@@ -8,7 +8,7 @@ import requests.{get, Response}
 import ujson.read
 import scala.collection.immutable.Queue
 import upickle.default
-import spark.customSource.read.stream.DefaultSource
+import com.pmflow.aqicnSource.read.stream.DefaultSource
 
 object Main {
     // def main(args: Array[String]): Unit = {
