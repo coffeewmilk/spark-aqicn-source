@@ -21,13 +21,15 @@ class DefaultSource() extends TableProvider {
 }
 
 
+// what type is uid exactly
+
 object DefaultSource {
   def getSchema: StructType = {
 
     val structFields: Array[StructField] = Array[StructField] (
       StructField ("aqi", DataTypes.StringType, true, Metadata.empty),
       StructField ("station", DataTypes.StringType, true, Metadata.empty),
-      StructField ("uid", DataTypes.DoubleType, true, Metadata.empty),
+      StructField ("uid", DataTypes.IntegerType, true, Metadata.empty),
       StructField ("time", DataTypes.StringType, true, Metadata.empty),
       StructField ("lat", DataTypes.DoubleType, true, Metadata.empty),
       StructField ("lon", DataTypes.DoubleType, true, Metadata.empty)

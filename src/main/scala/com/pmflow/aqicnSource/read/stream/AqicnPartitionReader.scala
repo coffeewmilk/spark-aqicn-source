@@ -39,7 +39,7 @@ class AqicnPartitionReader (val inputPartition: AqicnInputPartition, val schema:
     val values = List(
       UTF8String.fromString(row("aqi").str),
       UTF8String.fromString(row("station")("name").str),
-      row("uid").num,
+      row("uid").num.toInt,
       UTF8String.fromString(row("station")("time").str),
       row("lat").num,
       row("lon").num
